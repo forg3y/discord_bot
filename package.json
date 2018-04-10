@@ -1,0 +1,11 @@
+{
+	"name": "weeb-bot",
+	"version": "1.0.0",
+	"description": "~* hewwo fweinds! :3 i wanna make server more kawaii!!!1!*~",
+	"main": "bot.js",
+	"author": "forg3y",
+	"dependencies": {
+		"discord.io": "^2.5.3",
+		"winston": "^2.4.1"
+	}
+}
