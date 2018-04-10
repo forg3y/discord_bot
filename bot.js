@@ -1,8 +1,8 @@
-const Discord = require('discord.js');
+var Discord = require('discord.io');
 // var logger = require('winston');
 
 // Initializez Discord Bot
-const bot = new Discord.Client();
+var bot = new Discord.Client();
 
 bot.on('ready', () => {
 	console.log('?');
