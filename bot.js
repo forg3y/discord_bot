@@ -1,32 +1,41 @@
 var Discord = require('discord.io');
-// var logger = require('winston');
-
-// Initializez Discord Bot
-var bot = new Discord.Client();
-
-bot.on('ready', () => {
-	console.log('?');
+var logger = require('winston');
+var auth = require('./auth.json');
+// Configure logger settings
+logger.remove(logger.transports.Console);
+logger.add(logger.transports.Console, {
+    colorize: true
 });
-
-bot.on('message', message => {
-	// Our bot needs to know if it will execute a command
-	// it will listen for messages that will start with 'o3o '
-	/*if(message.substring(0,4) == 'o3o ') {
-		var args = message.substring(1).split(' '); // might need to make (n) bigger?
-		var cmd = args[0];
-
-		args = args.splice(1);
-		switch(cmd) {
-			// owo ping
-			case 'ping':
-				message.reply('*~ hai cuties :3 ~*');
-			break;
-			// Just add more case commands!
-		}
-	}*/
-	if (message.content === 'owo ping') {
-		messge.reply('*~ hai cuties :3 ~*');
-	}
+logger.level = 'debug';
+// Initialize Discord Bot
+var bot = new Discord.Client({
+   token: auth.token,
+   autorun: true
+});
+bot.on('ready', function (evt) {
+    logger.info('Connected');
+    logger.info('Logged in as: ');
+    logger.info(bot.username + ' - (' + bot.id + ')');
+});
+bot.on('message', function (user, userID, channelID, message, evt) {
+    // Our bot needs to know if it will execute a command
+    // It will listen for messages that will start with `!`
+    if (message.substring(0, 1) == '!') {
+        var args = message.substring(1).split(' ');
+        var cmd = args[0];
+       
+        args = args.splice(1);
+        switch(cmd) {
+            // !ping
+            case 'ping':
+                bot.sendMessage({
+                    to: channelID,
+                    message: '*~ hai cutie :3 ~*!'
+                });
+            break;
+            // Just add any case commands if you want to..
+         }
+     }
 });
 
 bot.login(process.env.BOT_TOKEN);
