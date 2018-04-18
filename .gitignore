@@ -61,6 +61,4 @@ typings/
 .next
 
 #etc
-package.json
 auth.json
-package-lock.json
